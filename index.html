@@ -6,7 +6,6 @@
     <style>
         table {
             width: 80%;
-            border: 1px solid skyblue;
         }
         tr, td{
             width: 12.5%;
@@ -14,7 +13,7 @@
     </style>
 </head>
 <body>
-<table>
+<table border="1">
     <tr>
         <td id="num-15">1</td>
         <td id="num-16">2</td>
@@ -78,11 +77,13 @@
         move += valueDice;
         if (move > 28) {
             x = move -28;
+            document.getElementById('num-'+(28+x-valueDice)).innerHTML = "0";
         } else {
             x = move;
+            document.getElementById('num-'+(x-valueDice)).innerHTML = "0";
         }
+        move = x;
         document.getElementById("num-"+x).innerHTML = "Player 1";
-        document.getElementById('num-'+(x-valueDice)).innerHTML = "0";
     }
 
 
