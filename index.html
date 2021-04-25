@@ -11,6 +11,7 @@
             width: 12.5%;
         }
     </style>
+    <script src="File class.js"></script>
 </head>
 <body>
 <table border="1">
@@ -63,12 +64,10 @@
 <button onclick="throwDice()">Throw Dice</button>
 </body>
 <script>
-    // class Place {
-    //     constructor(id) {
-    //         this.id = id;
-    //     }
-    // }
-    document.getElementById('num-1').innerHTML = "Player 1";
+    function display(place) {
+            document.getElementById('num-'+place.placeId).innerHTML = place.placeName;
+    }
+    document.getElementById('num-1').innerHTML = player1.getPlayerName();
     let x = 1;
     let move = 1;
     function throwDice() {
@@ -83,8 +82,14 @@
             document.getElementById('num-'+(x-valueDice)).innerHTML = "0";
         }
         move = x;
-        document.getElementById("num-"+x).innerHTML = "Player 1";
+        document.getElementById("num-"+x).innerHTML = player1.getPlayerName();
     }
+        display(place2);
+        display(place3);
+        display(place4);
+        display(place5);
+        display(place6);
+        display(place7);
 
 
 </script>
