@@ -7,11 +7,13 @@
         table {
             width: 80%;
         }
-        tr, td{
+
+        tr, td {
             width: 12.5%;
         }
     </style>
     <script src="File class.js"></script>
+    <script src="Player.js"></script>
 </head>
 <body>
 <table border="1">
@@ -65,32 +67,39 @@
 </body>
 <script>
     function display(place) {
-            document.getElementById('num-'+place.placeId).innerHTML = place.placeName;
+        document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
     }
+
+    displayAll()
     document.getElementById('num-1').innerHTML = player1.getPlayerName();
     let x = 1;
     let move = 1;
+
     function throwDice() {
-        var valueDice = Math.round(Math.random()*5 + 1);
+        var valueDice = Math.round(Math.random() * 5 + 1);
         document.getElementById('display').innerHTML = valueDice;
         move += valueDice;
         if (move > 28) {
-            x = move -28;
-            document.getElementById('num-'+(28+x-valueDice)).innerHTML = "0";
+            x = move - 28;
+            let place = arr[28+x - valueDice - 1];
+            document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
+        } else if (move - valueDice - 2 >= 0) {
+            x = move;
+            let place = arr[x - valueDice - 1];
+            document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
         } else {
             x = move;
-            document.getElementById('num-'+(x-valueDice)).innerHTML = "0";
+            document.getElementById('num-' + (x - valueDice)).innerHTML = '0'
         }
         move = x;
-        document.getElementById("num-"+x).innerHTML = player1.getPlayerName();
+        document.getElementById("num-" + x).innerHTML = player1.getPlayerName();
     }
-        display(place2);
-        display(place3);
-        display(place4);
-        display(place5);
-        display(place6);
-        display(place7);
 
+    function displayAll() {
+        for (i = 0; i < arr.length; i++) {
+            display(arr[i])
+        }
+    }
 
 </script>
 </html>
