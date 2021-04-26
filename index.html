@@ -16,6 +16,18 @@
     <script src="Player.js"></script>
 </head>
 <body>
+<form>
+    <table border="1">
+        <tr>
+            <td id="player1"></td>
+            <td id="point1"></td>
+        </tr>
+        <tr>
+            <td id="player2"></td>
+            <td id="point2"></td>
+        </tr>
+    </table>
+</form>
 <table border="1">
     <tr>
         <td id="num-15">1</td>
@@ -64,6 +76,8 @@
     </tr>
 </table>
 <button onclick="throwDice()">Throw Dice</button>
+<br>
+<div id="guide"> </div>
 </body>
 <script>
     function display(place) {
@@ -89,17 +103,33 @@
             document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
         } else {
             x = move;
-            document.getElementById('num-' + (x - valueDice)).innerHTML = '0'
+            let place = arr[x - valueDice -1]
+            document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
         }
         move = x;
-        document.getElementById("num-" + x).innerHTML = player1.getPlayerName();
-    }
+        let place = arr[x-1]
+        document.getElementById("num-" + place.placeId).innerHTML = player1.getPlayerName();
+        document.getElementById('guide').innerHTML="Do you want to purchase "+ place.placeName + " with "+ place.placeValue+"<br><button onclick='accept()'>Yes</button><button onclick='refuse()'>No</button>"    }
 
     function displayAll() {
         for (i = 0; i < arr.length; i++) {
             display(arr[i])
         }
     }
-
+    function refuse() {
+        document.getElementById('guide').innerHTML= ""
+    }
+    let point1 = player1.getPoint();
+    function accept() {
+        let place = arr[x - 1]
+        document.getElementById("num-" + place.placeId).style.backgroundColor = 'red';
+        point1 = point1 - place.getValue()
+        document.getElementById('point1').innerHTML = point1;
+        document.getElementById('guide').innerHTML=""
+    }
+    document.getElementById('player1').innerHTML = player1.getPlayerName();
+    document.getElementById('point1').innerHTML = player1.getPoint();
+    document.getElementById('player2').innerHTML = player2.getPlayerName();
+    document.getElementById('point2').innerHTML = player2.getPoint();
 </script>
 </html>
