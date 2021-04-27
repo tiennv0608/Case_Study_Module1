@@ -10,5 +10,5 @@ class Player {
         }
     }
 }
-let player1 = new Player(prompt("Nhap ten cua ban"), 2000);
-let player2 = new Player(prompt("Nhap ten cua ban"), 2000);
+let player1 = new Player(prompt("Nhap ten"), 500);
+let player2 = new Player(prompt("Nhap ten"), 500);

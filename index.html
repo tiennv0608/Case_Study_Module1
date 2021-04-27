@@ -77,7 +77,7 @@
 </table>
 <button onclick="throwDice()">Throw Dice</button>
 <br>
-<div id="guide"> </div>
+<div id="guide"></div>
 </body>
 <script>
     function display(place) {
@@ -96,7 +96,7 @@
         if (move > 28) {
             x = move - 28;
             let place = arr[28+x - valueDice - 1];
-            document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
+            document.getElementById('num-' + place.placeId).innerHTML = place.getPlaceName() + '<br>' + place.getValue();
         } else if (move - valueDice - 2 >= 0) {
             x = move;
             let place = arr[x - valueDice - 1];
@@ -107,9 +107,14 @@
             document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
         }
         move = x;
-        let place = arr[x-1]
+        let place = arr[x-1];
         document.getElementById("num-" + place.placeId).innerHTML = player1.getPlayerName();
-        document.getElementById('guide').innerHTML="Do you want to purchase "+ place.placeName + " with "+ place.placeValue+"<br><button onclick='accept()'>Yes</button><button onclick='refuse()'>No</button>"    }
+        if (x-1>0) {
+            document.getElementById('guide').innerHTML="Do you want to purchase "+ place.placeName + " with "+ place.placeValue+"<br><button onclick='accept()'>Yes</button><button onclick='refuse()'>No</button>"
+        } else {
+            document.getElementById('guide').innerHTML= "";
+        }
+    }
 
     function displayAll() {
         for (i = 0; i < arr.length; i++) {
@@ -120,13 +125,59 @@
         document.getElementById('guide').innerHTML= ""
     }
     let point1 = player1.getPoint();
+    let arrPlace1 = [];
     function accept() {
         let place = arr[x - 1]
-        document.getElementById("num-" + place.placeId).style.backgroundColor = 'red';
         point1 = point1 - place.getValue()
-        document.getElementById('point1').innerHTML = point1;
-        document.getElementById('guide').innerHTML=""
+        if (point1>=0) {
+            arrPlace1.push(place);
+            document.getElementById("num-" + place.placeId).style.backgroundColor = 'red';
+            document.getElementById('point1').innerHTML = point1;
+            document.getElementById('guide').innerHTML=""
+        } else {
+            let i =0;
+            if(i<arrPlace1.length){
+                document.getElementById('guide').innerHTML="Do you want to sell "+ arrPlace1[i].placeName + " with "+ (arrPlace1[i].placeValue/2)+"<br><button onclick='acceptSell()'>Yes</button><button onclick='refuseSell()'>No</button>"
+            }
+            console.log("Mua nhiều đất vậy làm chi bạn ơi!!! Bán bớt nhà đi nào!!!")
+        }
     }
+    let index = 1
+    function refuseSell(){
+        if (index<arrPlace1.length){
+            document.getElementById('guide').innerHTML="Do you want to sell "+ arrPlace1[index].placeName + " with "+ (arrPlace1[index].placeValue/2)+"<br><button onclick='acceptSell()'>Yes</button><button onclick='refuseSell()'>No</button>"
+            index++;
+        } else {
+            index = 0;
+            document.getElementById('guide').innerHTML="Do you want to sell "+ arrPlace1[index].placeName + " with "+ (arrPlace1[index].placeValue/2)+"<br><button onclick='acceptSell()'>Yes</button><button onclick='refuseSell()'>No</button>"
+            index++;
+        }
+    }
+    let index1 =0
+    function acceptSell(){
+        // checkGameOver();
+        point1 = point1 + arrPlace1[index1].placeValue/2;
+        document.getElementById('point1').innerHTML = point1;
+        document.getElementById("num-" + arrPlace1[index1].placeId).style.backgroundColor = '';
+        arrPlace1.splice(index1,1);
+        if(point1 <0) {
+            document.getElementById('guide').innerHTML="Do you want to sell "+ arrPlace1[index1].placeName + " with "+ (arrPlace1[index1].placeValue/2)+"<br><button onclick='acceptSell()'>Yes</button><button onclick='refuseSell()'>No</button>"
+        } else {
+            let place = arr[x-1];
+            arrPlace1.push(place);
+            document.getElementById("num-" + place.placeId).style.backgroundColor = 'red';
+            document.getElementById('guide').innerHTML= "";
+        }
+    }
+    function checkGameOver(){
+        if (arrPlace1.length==0 && point1 <0) {
+            alert("game over")
+            clearInterval(check);
+        }
+    }
+    let check = setInterval(checkGameOver);
+    checkGameOver();
+
     document.getElementById('player1').innerHTML = player1.getPlayerName();
     document.getElementById('point1').innerHTML = player1.getPoint();
     document.getElementById('player2').innerHTML = player2.getPlayerName();
