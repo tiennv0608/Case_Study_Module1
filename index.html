@@ -122,13 +122,13 @@
         if (x - 1 > 0) {
             z = player
             let str = "Do you want to purchase " + place.placeName + " with " + place.placeValue + "<br>";
-            str += "<button type='button' onclick='accept(z)'>Yes</button><button type='button' onclick='refuse()'>No</button>"
+            str += "<button type='button' onclick='accept(z)' id='yes'>Yes</button><button type='button' onclick='refuse()'>No</button>"
             document.getElementById('guide').innerHTML = str
         } else {
             document.getElementById('guide').innerHTML = "";
         }
+        payWhenVisiting(player1,player2);
     }
-
     function refuse() {
         document.getElementById('guide').innerHTML = ""
     }
@@ -182,6 +182,22 @@
         if (player.arrPlayer.length==0){
             alert(player.getPlayerName() + " da thua")
         }
+    }
+    function payWhenVisiting(player1, player2){
+        let place = arr[x-1]
+        if (document.getElementById('num-'+place.placeId).style.backgroundColor === player1.color) {
+            player2.point -= (place.placeValue/4);
+            player1.point += (place.placeValue/4);
+            alert("Nộp tiền nhé bạn "+(place.placeValue/4));
+            document.getElementById('guide').innerHTML ="";
+        } else if (document.getElementById('num-'+place.placeId).style.backgroundColor === player2.color) {
+            player1.point -= (place.placeValue / 4);
+            player2.point += (place.placeValue / 4);
+            alert("Nộp tiền nhé bạn "+(place.placeValue/4));
+            document.getElementById('guide').innerHTML ="";
+        }
+        document.getElementById('point1').innerHTML = player1.getPoint();
+        document.getElementById('point2').innerHTML = player2.getPoint();
     }
 
     document.getElementById('player1').innerHTML = player1.getPlayerName();
