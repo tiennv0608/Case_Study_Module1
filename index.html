@@ -81,102 +81,111 @@
 </body>
 <script>
     function display(place) {
-        document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
-    }
-
-    displayAll()
-    document.getElementById('num-1').innerHTML = player1.getPlayerName();
-    let x = 1;
-    let move = 1;
-
-    function throwDice() {
-        var valueDice = Math.round(Math.random() * 5 + 1);
-        document.getElementById('display').innerHTML = valueDice;
-        move += valueDice;
-        if (move > 28) {
-            x = move - 28;
-            let place = arr[28+x - valueDice - 1];
-            document.getElementById('num-' + place.placeId).innerHTML = place.getPlaceName() + '<br>' + place.getValue();
-        } else if (move - valueDice - 2 >= 0) {
-            x = move;
-            let place = arr[x - valueDice - 1];
-            document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
-        } else {
-            x = move;
-            let place = arr[x - valueDice -1]
-            document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
-        }
-        move = x;
-        let place = arr[x-1];
-        document.getElementById("num-" + place.placeId).innerHTML = player1.getPlayerName();
-        if (x-1>0) {
-            document.getElementById('guide').innerHTML="Do you want to purchase "+ place.placeName + " with "+ place.placeValue+"<br><button onclick='accept()'>Yes</button><button onclick='refuse()'>No</button>"
-        } else {
-            document.getElementById('guide').innerHTML= "";
-        }
+        document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue + '<br>';
     }
 
     function displayAll() {
-        for (i = 0; i < arr.length; i++) {
+        for (let i = 0; i < arr.length; i++) {
             display(arr[i])
         }
     }
-    function refuse() {
-        document.getElementById('guide').innerHTML= ""
+
+    displayAll()
+    document.getElementById('num-1').innerHTML += player1.getPlayerName() + "<br>" + player2.getPlayerName();
+    let x = 1;
+    let turn = 1;
+
+    function throwDice(player) {
+        turn % 2 === 0 ? player = player2 : player = player1;
+        turn++;
+        let valueDice = Math.round(Math.random() * 5 + 1);
+        document.getElementById('display').innerHTML = valueDice;
+        player.move += valueDice;
+        if (player.move > 28) {
+            player.point += 200;
+            document.getElementById('point'+player.number).innerHTML = player.point;
+            x = player.move - 28;
+            let place = arr[28 + x - valueDice - 1];
+            document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
+        } else if (player.move - valueDice - 2 >= 0) {
+            x = player.move;
+            let place = arr[x - valueDice - 1];
+            document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
+        } else {
+            x = player.move;
+            let place = arr[x - valueDice - 1]
+            document.getElementById('num-' + place.placeId).innerHTML = place.placeName + '<br>' + place.placeValue;
+        }
+        player.move = x;
+        let place = arr[x - 1];
+        document.getElementById("num-" + place.placeId).innerHTML += player.getPlayerName();
+        if (x - 1 > 0) {
+            z = player
+            let str = "Do you want to purchase " + place.placeName + " with " + place.placeValue + "<br>";
+            str += "<button type='button' onclick='accept(z)'>Yes</button><button type='button' onclick='refuse()'>No</button>"
+            document.getElementById('guide').innerHTML = str
+        } else {
+            document.getElementById('guide').innerHTML = "";
+        }
     }
-    let point1 = player1.getPoint();
-    let arrPlace1 = [];
-    function accept() {
+
+    function refuse() {
+        document.getElementById('guide').innerHTML = ""
+    }
+
+    function accept(player) {
         let place = arr[x - 1]
-        point1 = point1 - place.getValue()
-        if (point1>=0) {
-            arrPlace1.push(place);
-            document.getElementById("num-" + place.placeId).style.backgroundColor = 'red';
-            document.getElementById('point1').innerHTML = point1;
+        player.point = player.getPoint() - place.getValue()
+        if (player.point>=0) {
+            player.arrPlayer.push(place);
+            document.getElementById("num-" + place.placeId).style.backgroundColor = player.color;
+            document.getElementById('point'+player.number).innerHTML = player.point;
             document.getElementById('guide').innerHTML=""
         } else {
             let i =0;
-            if(i<arrPlace1.length){
-                document.getElementById('guide').innerHTML="Do you want to sell "+ arrPlace1[i].placeName + " with "+ (arrPlace1[i].placeValue/2)+"<br><button onclick='acceptSell()'>Yes</button><button onclick='refuseSell()'>No</button>"
+            if(i<player.arrPlayer.length){
+                document.getElementById('guide').innerHTML="Do you want to sell "+ player.arrPlayer[i].placeName + " with "+ player.arrPlayer[i].placeValue/2+"<br><button type='button' onclick='acceptSell(z)'>Yes</button><button type='button' onclick='refuseSell(z)'>No</button>"
             }
-            console.log("Mua nhiều đất vậy làm chi bạn ơi!!! Bán bớt nhà đi nào!!!")
+            alert("Mua nhiều đất vậy làm chi bạn ơi!!! Bán bớt nhà đi nào!!!")
         }
     }
+
     let index = 1
-    function refuseSell(){
-        if (index<arrPlace1.length){
-            document.getElementById('guide').innerHTML="Do you want to sell "+ arrPlace1[index].placeName + " with "+ (arrPlace1[index].placeValue/2)+"<br><button onclick='acceptSell()'>Yes</button><button onclick='refuseSell()'>No</button>"
+    function refuseSell(player){
+        if (index<player.arrPlayer.length){
+            document.getElementById('guide').innerHTML="Do you want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
             index++;
         } else {
             index = 0;
-            document.getElementById('guide').innerHTML="Do you want to sell "+ arrPlace1[index].placeName + " with "+ (arrPlace1[index].placeValue/2)+"<br><button onclick='acceptSell()'>Yes</button><button onclick='refuseSell()'>No</button>"
+            document.getElementById('guide').innerHTML="Do you want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
             index++;
         }
     }
     let index1 =0
-    function acceptSell(){
-        // checkGameOver();
-        point1 = point1 + arrPlace1[index1].placeValue/2;
-        document.getElementById('point1').innerHTML = point1;
-        document.getElementById("num-" + arrPlace1[index1].placeId).style.backgroundColor = '';
-        arrPlace1.splice(index1,1);
-        if(point1 <0) {
-            document.getElementById('guide').innerHTML="Do you want to sell "+ arrPlace1[index1].placeName + " with "+ (arrPlace1[index1].placeValue/2)+"<br><button onclick='acceptSell()'>Yes</button><button onclick='refuseSell()'>No</button>"
+    function acceptSell(player){
+        player.point = player.point + player.arrPlayer[index1].placeValue/2;
+        document.getElementById('point'+player.number).innerHTML = player.point;
+        document.getElementById("num-" + player.arrPlayer[index1].placeId).style.backgroundColor = '';
+        player.arrPlayer.splice(index1,1);
+        if(player.point <0) {
+            checkGameOver(player);
+            document.getElementById('guide').innerHTML="Do you want to sell "+ player.arrPlayer[index1].placeName + " with "+ (player.arrPlayer[index1].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
         } else {
             let place = arr[x-1];
-            arrPlace1.push(place);
-            document.getElementById("num-" + place.placeId).style.backgroundColor = 'red';
+            player.arrPlayer.push(place);
+            document.getElementById("num-" + place.placeId).style.backgroundColor = player.color;
             document.getElementById('guide').innerHTML= "";
         }
     }
-    function checkGameOver(){
-        if (arrPlace1.length==0 && point1 <0) {
-            alert("game over")
-            clearInterval(check);
+
+    function checkGameOver(player){
+        if (player.arrPlayer.length==0){
+            alert(player.getPlayerName() + " da thua")
         }
     }
-    let check = setInterval(checkGameOver);
-    checkGameOver();
+    function payWhenVisiting(player1, player2) {
+
+    }
 
     document.getElementById('player1').innerHTML = player1.getPlayerName();
     document.getElementById('point1').innerHTML = player1.getPoint();
