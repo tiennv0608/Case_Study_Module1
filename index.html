@@ -5,79 +5,92 @@
     <title>Title</title>
     <style>
         table {
+            border-collapse: collapse;
+            border: 5px solid black;
             width: 80%;
+            height: 800px;
         }
-
-        tr, td {
+        tr {
+            height: 100px;
+        }
+        td {
+            border: 2px solid black;
             width: 12.5%;
+            font-size: x-large;
+            font-weight: bold;
+            color: blue;
+            text-align: center;
+            background-size: 100% 100%;
         }
     </style>
     <script src="Place.js"></script>
     <script src="Player.js"></script>
 </head>
 <body>
-<form>
-    <table border="1">
-        <tr>
-            <td id="player1"></td>
-            <td id="point1"></td>
-        </tr>
-        <tr>
-            <td id="player2"></td>
-            <td id="point2"></td>
-        </tr>
-    </table>
-</form>
-<table border="1">
+<table>
     <tr>
-        <td id="num-15">1</td>
-        <td id="num-16">2</td>
-        <td id="num-17">3</td>
-        <td id="num-18">4</td>
-        <td id="num-19">5</td>
-        <td id="num-20">6</td>
-        <td id="num-21">7</td>
-        <td id="num-22">8</td>
+        <td id="num-15" style="background-image: url('Anh/Pleiku.jpg')"></td>
+        <td id="num-16" style="background-image: url('Anh/BinhThuan.jpg')"></td>
+        <td id="num-17" style="background-image: url('Anh/BinhDuong.jpg')"></td>
+        <td id="num-18" style="background-image: url('Anh/LongAn.jpg')"></td>
+        <td id="num-19" style="background-image: url('Anh/TPHoChiMinh.jpg')"></td>
+        <td id="num-20" style="background-image: url('Anh/VungTau.jpg')"></td>
+        <td id="num-21" style="background-image: url('Anh/CanTho.jpg')"></td>
+        <td id="num-22" style="background-image: url('Anh/QuangNam.jpg')"></td>
     </tr>
     <tr>
-        <td id="num-14">9</td>
-        <td rowspan="6" colspan="6" id="display"></td>
-        <td id="num-23">10</td>
+        <td id="num-14" style="background-image: url('Anh/NinhThuan.jpg')"></td>
+        <td colspan="2">Player Name</td>
+        <td>Point</td>
+        <td>Position</td>
+        <td colspan="2">Place</td>
+        <td id="num-23" style="background-image: url('Anh/SocTrang.jpg')"></td>
     </tr>
     <tr>
-        <td id="num-13">11</td>
-        <td id="num-24">12</td>
+        <td id="num-13" style="background-image: url('Anh/QuangNgai.jpg')"></td>
+        <td id="player1" colspan="2"></td>
+        <td id="point1"></td>
+        <td id="position1"></td>
+        <td id="display1" colspan="2"></td>
+        <td id="num-24" style="background-image: url('Anh/HoangSa.jpg')"></td>
     </tr>
     <tr>
-        <td id="num-12">13</td>
-        <td id="num-25">14</td>
+        <td id="num-12" style="background-image: url('Anh/DaNang.jpg')"></td>
+        <td id="player2" colspan="2"></td>
+        <td id="point2"></td>
+        <td id="position2"></td>
+        <td id="display2" colspan="2"></td>
+        <td id="num-25" style="background-image: url('Anh/TruongSa.jpg')"></td>
     </tr>
     <tr>
-        <td id="num-11">15</td>
-        <td id="num-26">16</td>
+        <td id="num-11" style="background-image: url('Anh/Hue.jpg')"></td>
+        <td><button onclick="throwDice()">Throw Dice</button></td>
+        <td colspan="5" id="display"></td>
+        <td id="num-26" style="background-image: url('Anh/PhuQuoc.jpg')"></td>
     </tr>
     <tr>
-        <td id="num-10">17</td>
-        <td id="num-27">18</td>
+        <td id="num-10" style="background-image: url('Anh/QuangTri.jpg')"></td>
+        <td>Guide</td>
+        <td colspan="5" id="guide"></td>
+        <td id="num-27" style="background-image: url('Anh/BinhDinh.jpg')"></td>
     </tr>
     <tr>
-        <td id="num-9">19</td>
-        <td id="num-28">20</td>
+        <td id="num-9" style="background-image: url('Anh/QuangBinh.jpg')"></td>
+        <td></td>
+        <td colspan="5"></td>
+        <td id="num-28" style="background-image: url('Anh/CaMau.jpg')"></td>
     </tr>
     <tr>
-        <td id="num-8">21</td>
-        <td id="num-7">22</td>
-        <td id="num-6">23</td>
-        <td id="num-5">24</td>
-        <td id="num-4">25</td>
-        <td id="num-3">26</td>
-        <td id="num-2">27</td>
-        <td id="num-1">28</td>
+        <td id="num-8" style="background-image: url('Anh/HaTinh.jpg')"></td>
+        <td id="num-7" style="background-image: url('Anh/NgheAn.jpg')"></td>
+        <td id="num-6" style="background-image: url('Anh/ThaiBinh.jpg')"></td>
+        <td id="num-5" style="background-image: url('Anh/ThanhHoa.jpg')"></td>
+        <td id="num-4" style="background-image: url('Anh/HaiDuong.jpg')"></td>
+        <td id="num-3" style="background-image: url('Anh/HaiPhong.jpg')"></td>
+        <td id="num-2" style="background-image: url('Anh/HaNoi.jpg')"></td>
+        <td id="num-1" style="background-image: url('Anh/Start.jpg')"></td>
     </tr>
 </table>
-<button onclick="throwDice()">Throw Dice</button>
-<br>
-<div id="guide"></div>
 </body>
 <script>
     function display(place) {
@@ -86,15 +99,17 @@
 
     function displayAll() {
         for (let i = 0; i < arr.length; i++) {
-            display(arr[i])
+            display(arr[i]);
         }
     }
 
-    displayAll()
+    displayAll();
     document.getElementById('num-1').innerHTML += player1.getPlayerName() + "<br>" + player2.getPlayerName();
+    function displayPlayerPosition(player,place) {
+        document.getElementById('position'+player.number).innerHTML = place.getPlaceName()
+    }
     let x = 1;
     let turn = 1;
-
     function throwDice(player) {
         turn % 2 === 0 ? player = player2 : player = player1;
         turn++;
@@ -118,16 +133,24 @@
         }
         player.move = x;
         let place = arr[x - 1];
-        document.getElementById("num-" + place.placeId).innerHTML += player.getPlayerName();
+        document.getElementById("num-" + place.placeId).innerHTML += player.getPlayerName() + "<br>";
         if (x - 1 > 0) {
             z = player
-            let str = "Do you want to purchase " + place.placeName + " with " + place.placeValue + "<br>";
+            let str = "Do "+z.getPlayerName()+" want to purchase " + place.placeName + " with " + place.placeValue + "<br>";
             str += "<button type='button' onclick='accept(z)' id='yes'>Yes</button><button type='button' onclick='refuse()'>No</button>"
             document.getElementById('guide').innerHTML = str
         } else {
             document.getElementById('guide').innerHTML = "";
         }
+        displayPlayerPosition(player,place)
         payWhenVisiting(player1,player2);
+        if (player.point<0) {
+            checkGameOver(player);
+            let i = 0;
+            if (i < player.arrPlayer.length) {
+                document.getElementById('guide').innerHTML = "Do "+player.getPlayerName()+" want to sell " + player.arrPlayer[i].placeName + " with " + player.arrPlayer[i].placeValue / 2 + "<br><button type='button' onclick='acceptSell(z)'>Yes</button><button type='button' onclick='refuseSell(z)'>No</button>"
+            }
+        }
     }
     function refuse() {
         document.getElementById('guide').innerHTML = ""
@@ -135,16 +158,19 @@
 
     function accept(player) {
         let place = arr[x - 1]
+        let displayPlayerPlace = document.getElementById('display'+player.number);
         player.point = player.getPoint() - place.getValue()
         if (player.point>=0) {
             player.arrPlayer.push(place);
-            document.getElementById("num-" + place.placeId).style.backgroundColor = player.color;
+            displayPlayerPlace.innerHTML += place.getPlaceName() +",";
+            document.getElementById("num-" + place.placeId).style.backgroundColor=player.color
             document.getElementById('point'+player.number).innerHTML = player.point;
             document.getElementById('guide').innerHTML=""
         } else {
+            checkGameOver(player);
             let i =0;
             if(i<player.arrPlayer.length){
-                document.getElementById('guide').innerHTML="Do you want to sell "+ player.arrPlayer[i].placeName + " with "+ player.arrPlayer[i].placeValue/2+"<br><button type='button' onclick='acceptSell(z)'>Yes</button><button type='button' onclick='refuseSell(z)'>No</button>"
+                document.getElementById('guide').innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[i].placeName + " with "+ player.arrPlayer[i].placeValue/2+"<br><button type='button' onclick='acceptSell(z)'>Yes</button><button type='button' onclick='refuseSell(z)'>No</button>"
             }
             alert("Mua nhiều đất vậy làm chi bạn ơi!!! Bán bớt nhà đi nào!!!")
         }
@@ -153,14 +179,15 @@
     let index = 1
     function refuseSell(player){
         if (index<player.arrPlayer.length){
-            document.getElementById('guide').innerHTML="Do you want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
+            document.getElementById('guide').innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
             index++;
         } else {
             index = 0;
-            document.getElementById('guide').innerHTML="Do you want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
+            document.getElementById('guide').innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
             index++;
         }
     }
+
     let index1 =0
     function acceptSell(player){
         player.point = player.point + player.arrPlayer[index1].placeValue/2;
@@ -169,22 +196,43 @@
         player.arrPlayer.splice(index1,1);
         if(player.point <0) {
             checkGameOver(player);
-            document.getElementById('guide').innerHTML="Do you want to sell "+ player.arrPlayer[index1].placeName + " with "+ (player.arrPlayer[index1].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
-        } else {
-            let place = arr[x-1];
-            player.arrPlayer.push(place);
-            document.getElementById("num-" + place.placeId).style.backgroundColor = player.color;
-            document.getElementById('guide').innerHTML= "";
+            document.getElementById('guide').innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[index1].placeName + " with "+ (player.arrPlayer[index1].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
+        }
+        check(player1,player2)
+        // for (let i =0; i<player.arrPlayer.length;i++){
+        //     if (place === player.arrPlayer[i]) {
+        //         document.getElementById('guide').innerHTML = "";
+        //         break;
+        //     } else {
+        //         player.arrPlayer.push(place);
+        //         document.getElementById("num-" + place.placeId).style.backgroundColor = player.color;
+        //         document.getElementById('guide').innerHTML= "";
+        //     }
+        // }
+    }
+    function check(player1, player2) {
+        let place = arr[x-1];
+        for (let i =0; i<player1.arrPlayer.length;i++){
+            if (place === player1.arrPlayer[i]) {
+                document.getElementById('guide').innerHTML = "";
+                break;
+            } else {
+                player1.arrPlayer.push(place);
+                document.getElementById("num-" + place.placeId).style.backgroundColor= player2.color;
+                document.getElementById('guide').innerHTML= "";
+            }
         }
     }
 
     function checkGameOver(player){
         if (player.arrPlayer.length==0){
             alert(player.getPlayerName() + " da thua")
+        } else {
+            alert("Bán bớt nhà đi bạn êii")
         }
     }
     function payWhenVisiting(player1, player2){
-        let place = arr[x-1]
+        let place = arr[x-1];
         if (document.getElementById('num-'+place.placeId).style.backgroundColor === player1.color) {
             player2.point -= (place.placeValue/4);
             player1.point += (place.placeValue/4);
@@ -196,13 +244,18 @@
             alert("Nộp tiền nhé bạn "+(place.placeValue/4));
             document.getElementById('guide').innerHTML ="";
         }
-        document.getElementById('point1').innerHTML = player1.getPoint();
-        document.getElementById('point2').innerHTML = player2.getPoint();
+        getPoint(player1);
+        getPoint(player2);
     }
-
-    document.getElementById('player1').innerHTML = player1.getPlayerName();
-    document.getElementById('point1').innerHTML = player1.getPoint();
-    document.getElementById('player2').innerHTML = player2.getPlayerName();
-    document.getElementById('point2').innerHTML = player2.getPoint();
+    function getPoint (player) {
+        document.getElementById('point'+player.number).innerHTML = player.getPoint();
+    }
+    function displayPlayer(player){
+        document.getElementById('player'+player.number).innerHTML = player.getPlayerName();
+    }
+    displayPlayer(player1);
+    displayPlayer(player2);
+    getPoint(player1);
+    getPoint(player2);
 </script>
 </html>
