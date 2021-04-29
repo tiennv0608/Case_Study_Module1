@@ -53,14 +53,13 @@
     </tr>
     <tr>
         <td id="num-10" style="background-image: url('Anh/QuangTri.jpg')"></td>
-        <td>Guide</td>
-        <td colspan="5" id="guide"></td>
+        <td rowspan="2">Guide</td>
+        <td rowspan="2" colspan="5" id="guide"></td>
         <td id="num-27" style="background-image: url('Anh/BinhDinh.jpg')"></td>
     </tr>
     <tr>
         <td id="num-9" style="background-image: url('Anh/QuangBinh.jpg')"></td>
-        <td></td>
-        <td colspan="5"></td>
+
         <td id="num-28" style="background-image: url('Anh/CaMau.jpg')"></td>
     </tr>
     <tr>
@@ -79,7 +78,7 @@
     displayAll();
     document.getElementById('num-1').innerHTML += player1.getPlayerName() + "<br>" + player2.getPlayerName();
     let guide = document.getElementById('guide');
-    let x = 1;
+    let indexMove = 1;
     let turn = 1;
 
     function refuse() {
@@ -87,11 +86,11 @@
     }
 
     function accept(player) {
-        let place = arr[x - 1]
-        player.point = player.getPoint() - place.getValue()
+        let place = arr[indexMove - 1];
+        player.point = player.getPoint() - place.getValue();
+        player.arrPlayer.push(place);
+        document.getElementById("num-" + place.placeId).style.backgroundColor = player.color;
         if (player.point>=0) {
-            player.arrPlayer.push(place);
-            document.getElementById("num-" + place.placeId).style.backgroundColor = player.color
             document.getElementById('point'+player.number).innerHTML = player.point;
             guide.innerHTML=""
         } else {
@@ -118,7 +117,7 @@
 
     let index1 =0
     function acceptSell(player){
-        let place = arr[x-1]
+        let place = arr[indexMove-1]
         player.point = player.point + player.arrPlayer[index1].placeValue/2;
         document.getElementById('point'+player.number).innerHTML = player.point;
         document.getElementById("num-" + player.arrPlayer[index1].placeId).style.backgroundColor = '';
@@ -128,9 +127,8 @@
             checkGameOver(player);
             guide.innerHTML = "Do " + player.getPlayerName() + " want to sell " + player.arrPlayer[index1].placeName + " with " + (player.arrPlayer[index1].placeValue / 2) + "<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
         } else {
-                player.arrPlayer.push(place);
-                document.getElementById("num-" + place.placeId).style.backgroundColor = player.color;
-                document.getElementById('guide').innerHTML= "";
+            player.arrPlayer.push(place);
+            guide.innerHTML= "";
         }
     }
     // function check(player1, player2) {
@@ -146,6 +144,12 @@
     //         }
     //     }
     // }
+    function check(player) {
+        let place = arr[indexMove-1];
+        if (player.arrPlayer.indexOf(place) === -1) {
+            return true;
+        }
+    }
 
     function checkGameOver(player){
         if (player.arrPlayer.length==0){
@@ -153,17 +157,21 @@
         }
     }
     function payWhenVisiting(player1, player2){
-        let place = arr[x-1];
-        if (document.getElementById('num-'+place.placeId).style.backgroundColor === player1.color) {
-            player2.point -= (place.placeValue/4);
-            player1.point += (place.placeValue/4);
-            alert("Mình xin chứ mình không cướp êiiii!!!");
-            guide.innerHTML ="";
-        } else if (document.getElementById('num-'+place.placeId).style.backgroundColor === player2.color) {
-            player1.point -= (place.placeValue / 4);
-            player2.point += (place.placeValue / 4);
-            alert("Mình xin chứ mình không cướp êiiii!!!");
-            guide.innerHTML ="";
+        let place = arr[indexMove-1];
+        if (check(player2)){
+            if (document.getElementById('num-'+place.placeId).style.backgroundColor === player1.color) {
+                player2.point -= (place.placeValue/4);
+                player1.point += (place.placeValue/4);
+                alert("Mình xin chứ mình không cướp êiiii!!!");
+                guide.innerHTML ="";
+            }
+        } else if (check(player1)){
+            if (document.getElementById('num-'+place.placeId).style.backgroundColor === player2.color) {
+                player1.point -= (place.placeValue / 4);
+                player2.point += (place.placeValue / 4);
+                alert("Mình xin chứ mình không cướp êiiii!!!");
+                guide.innerHTML ="";
+            }
         }
         displayPoint(player1);
         displayPoint(player2);

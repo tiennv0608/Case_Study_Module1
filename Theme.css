@@ -8,13 +8,14 @@ tr {
     height: 100px;
 }
 td {
+    background: no-repeat;
     border: 2px solid black;
     width: 12.5%;
-    font-size: x-large;
+    font-size: 20px;
     font-weight: bold;
     color: blue;
     text-align: center;
-    background-size: 100% 100%;
+    background-size: 100% 80%;
 }
 button {
     background-color: lime;
