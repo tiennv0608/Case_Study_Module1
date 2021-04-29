@@ -26,9 +26,9 @@ function throwDice(player) {
         z = player
         let str = "Do "+z.getPlayerName()+" want to purchase " + place.placeName + " with " + place.placeValue + "<br>";
         str += "<button type='button' onclick='accept(z)' id='yes'>Yes</button><button type='button' onclick='refuse()'>No</button>"
-        document.getElementById('guide').innerHTML = str
+        guide.innerHTML = str
     } else {
-        document.getElementById('guide').innerHTML = "";
+        guide.innerHTML = "";
     }
     displayPlayerPosition(player,place)
     payWhenVisiting(player1,player2);
@@ -36,7 +36,7 @@ function throwDice(player) {
         checkGameOver(player);
         let i = 0;
         if (i < player.arrPlayer.length) {
-            document.getElementById('guide').innerHTML = "Do "+player.getPlayerName()+" want to sell " + player.arrPlayer[i].placeName + " with " + player.arrPlayer[i].placeValue / 2 + "<br><button type='button' onclick='acceptSell(z)'>Yes</button><button type='button' onclick='refuseSell(z)'>No</button>"
+            guide.innerHTML = "Do "+player.getPlayerName()+" want to sell " + player.arrPlayer[i].placeName + " with " + player.arrPlayer[i].placeValue / 2 + "<br><button type='button' onclick='acceptSell(z)'>Yes</button><button type='button' onclick='refuseSell(z)'>No</button>"
         }
     }
 }

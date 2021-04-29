@@ -3,30 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-    <style>
-        table {
-            border-collapse: collapse;
-            border: 5px solid black;
-            width: 80%;
-            height: 800px;
-        }
-        tr {
-            height: 100px;
-        }
-        td {
-            border: 2px solid black;
-            width: 12.5%;
-            font-size: x-large;
-            font-weight: bold;
-            color: blue;
-            text-align: center;
-            background-size: 100% 100%;
-        }
-    </style>
     <script src="Place.js"></script>
     <script src="Player.js"></script>
     <script src="Display.js"></script>
     <script src="Moving.js"></script>
+    <link rel="stylesheet" href="theme.css">
 </head>
 <body>
 <table>
@@ -97,15 +78,12 @@
 <script>
     displayAll();
     document.getElementById('num-1').innerHTML += player1.getPlayerName() + "<br>" + player2.getPlayerName();
-    displayPlayer(player1);
-    displayPlayer(player2);
-    getPoint(player1);
-    getPoint(player2);
+    let guide = document.getElementById('guide');
     let x = 1;
     let turn = 1;
 
     function refuse() {
-        document.getElementById('guide').innerHTML = ""
+        guide.innerHTML = ""
     }
 
     function accept(player) {
@@ -115,27 +93,26 @@
         if (player.point>=0) {
             player.arrPlayer.push(place);
             displayPlayerPlace.innerHTML += place.getPlaceName() +",";
-            document.getElementById("num-" + place.placeId).style.backgroundColor=player.color
+            document.getElementById("num-" + place.placeId).style.backgroundColor = player.color
             document.getElementById('point'+player.number).innerHTML = player.point;
-            document.getElementById('guide').innerHTML=""
+            guide.innerHTML=""
         } else {
             checkGameOver(player);
             let i =0;
             if(i<player.arrPlayer.length){
-                document.getElementById('guide').innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[i].placeName + " with "+ player.arrPlayer[i].placeValue/2+"<br><button type='button' onclick='acceptSell(z)'>Yes</button><button type='button' onclick='refuseSell(z)'>No</button>"
+                guide.innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[i].placeName + " with "+ player.arrPlayer[i].placeValue/2+"<br><button type='button' onclick='acceptSell(z)'>Yes</button><button type='button' onclick='refuseSell(z)'>No</button>"
             }
-            alert("Mua nhiều đất vậy làm chi bạn ơi!!! Bán bớt nhà đi nào!!!")
         }
     }
 
     let index = 1
     function refuseSell(player){
         if (index<player.arrPlayer.length){
-            document.getElementById('guide').innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
+            guide.innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
             index++;
         } else {
             index = 0;
-            document.getElementById('guide').innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
+            guide.innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[index].placeName + " with "+ (player.arrPlayer[index].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
             index++;
         }
     }
@@ -148,7 +125,7 @@
         player.arrPlayer.splice(index1,1);
         if(player.point <0) {
             checkGameOver(player);
-            document.getElementById('guide').innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[index1].placeName + " with "+ (player.arrPlayer[index1].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
+            guide.innerHTML="Do "+player.getPlayerName()+" want to sell "+ player.arrPlayer[index1].placeName + " with "+ (player.arrPlayer[index1].placeValue/2)+"<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
         }
         check(player1,player2)
         // for (let i =0; i<player.arrPlayer.length;i++){
@@ -166,12 +143,12 @@
         let place = arr[x-1];
         for (let i =0; i<player1.arrPlayer.length;i++){
             if (place === player1.arrPlayer[i]) {
-                document.getElementById('guide').innerHTML = "";
+                guide.innerHTML = "";
                 break;
             } else {
                 player1.arrPlayer.push(place);
                 document.getElementById("num-" + place.placeId).style.backgroundColor= player2.color;
-                document.getElementById('guide').innerHTML= "";
+                guide.innerHTML= "";
             }
         }
     }
@@ -179,8 +156,6 @@
     function checkGameOver(player){
         if (player.arrPlayer.length==0){
             alert(player.getPlayerName() + " da thua")
-        } else {
-            alert("Bán bớt nhà đi bạn êii")
         }
     }
     function payWhenVisiting(player1, player2){
@@ -189,15 +164,15 @@
             player2.point -= (place.placeValue/4);
             player1.point += (place.placeValue/4);
             alert("Nộp tiền nhé bạn "+(place.placeValue/4));
-            document.getElementById('guide').innerHTML ="";
+            guide.innerHTML ="";
         } else if (document.getElementById('num-'+place.placeId).style.backgroundColor === player2.color) {
             player1.point -= (place.placeValue / 4);
             player2.point += (place.placeValue / 4);
             alert("Nộp tiền nhé bạn "+(place.placeValue/4));
-            document.getElementById('guide').innerHTML ="";
+            guide.innerHTML ="";
         }
-        getPoint(player1);
-        getPoint(player2);
+        displayPoint(player1);
+        displayPoint(player2);
     }
 
 </script>

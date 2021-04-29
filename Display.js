@@ -6,9 +6,13 @@ function displayAll() {
     for (let i = 0; i < arr.length; i++) {
         display(arr[i]);
     }
+    displayPlayer(player1);
+    displayPlayer(player2);
+    displayPoint(player1);
+    displayPoint(player2);
 }
 
-function getPoint (player) {
+function displayPoint (player) {
     document.getElementById('point'+player.number).innerHTML = player.getPoint();
 }
 function displayPlayer(player){
