@@ -26,7 +26,7 @@ button {
     font-weight: bold;
 }
 body.cotyphu {
-    background: url("Anh/Cotyphu.jpg") no-repeat;
+    background: url("../Anh/Cotyphu.jpg") no-repeat;
     background-size: 100% 100%;
 }
 button.btn1 {
