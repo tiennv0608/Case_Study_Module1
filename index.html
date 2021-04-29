@@ -82,7 +82,7 @@
     let turn = 1;
 
     function refuse() {
-        guide.innerHTML = ""
+        guide.innerHTML = "";
     }
 
     function accept(player) {
@@ -115,35 +115,23 @@
         }
     }
 
-    let index1 =0
+    let index1 =0;
     function acceptSell(player){
-        let place = arr[indexMove-1]
+        let place = arr[indexMove-1];
         player.point = player.point + player.arrPlayer[index1].placeValue/2;
         document.getElementById('point'+player.number).innerHTML = player.point;
         document.getElementById("num-" + player.arrPlayer[index1].placeId).style.backgroundColor = '';
         player.arrPlayer.splice(index1,1);
-        displayPlaceOfPlayer(place, player)
+        displayPlaceOfPlayer(place, player);
         if(player.point <0) {
             checkGameOver(player);
-            guide.innerHTML = "Do " + player.getPlayerName() + " want to sell " + player.arrPlayer[index1].placeName + " with " + (player.arrPlayer[index1].placeValue / 2) + "<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>"
+            guide.innerHTML = "Do " + player.getPlayerName() + " want to sell " + player.arrPlayer[index1].placeName + " with " + (player.arrPlayer[index1].placeValue / 2) + "<br><button onclick='acceptSell(z)'>Yes</button><button onclick='refuseSell(z)'>No</button>";
         } else {
             player.arrPlayer.push(place);
             guide.innerHTML= "";
         }
     }
-    // function check(player1, player2) {
-    //     let place = arr[x-1];
-    //     for (let i =0; i<player1.arrPlayer.length;i++){
-    //         if (place === player1.arrPlayer[i]) {
-    //             guide.innerHTML = "";
-    //             break;
-    //         } else {
-    //             player1.arrPlayer.push(place);
-    //             document.getElementById("num-" + place.placeId).style.backgroundColor= player2.color;
-    //             guide.innerHTML= "";
-    //         }
-    //     }
-    // }
+
     function check(player) {
         let place = arr[indexMove-1];
         if (player.arrPlayer.indexOf(place) === -1) {
@@ -153,7 +141,7 @@
 
     function checkGameOver(player){
         if (player.arrPlayer.length==0){
-            alert(player.getPlayerName() + " da thua")
+            alert(player.getPlayerName() + " da thua");
         }
     }
     function payWhenVisiting(player1, player2){
