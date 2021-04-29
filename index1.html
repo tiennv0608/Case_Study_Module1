@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <script src="cotyphu_js/Place.js"></script>
+    <script src="cotyphu_js/Player.js"></script>
+    <script src="cotyphu_js/Display.js"></script>
+    <script src="cotyphu_js/Moving.js"></script>
+    <link rel="stylesheet" href="Theme/Theme.css">
+    <script src="cotyphu_js/Buy_and_sell.js"></script>
+</head>
+<body>
+<table>
+    <tr>
+        <td id="num-15" style="background-image: url('Anh/Pleiku.jpg')"></td>
+        <td id="num-16" style="background-image: url('Anh/BinhThuan.jpg')"></td>
+        <td id="num-17" style="background-image: url('Anh/BinhDuong.jpg')"></td>
+        <td id="num-18" style="background-image: url('Anh/LongAn.jpg')"></td>
+        <td id="num-19" style="background-image: url('Anh/TPHoChiMinh.jpg')"></td>
+        <td id="num-20" style="background-image: url('Anh/VungTau.jpg')"></td>
+        <td id="num-21" style="background-image: url('Anh/CanTho.jpg')"></td>
+        <td id="num-22" style="background-image: url('Anh/QuangNam.jpg')"></td>
+    </tr>
+    <tr>
+        <td id="num-14" style="background-image: url('Anh/NinhThuan.jpg')"></td>
+        <td colspan="2">Player Name</td>
+        <td>Point</td>
+        <td>Position</td>
+        <td colspan="2">Place</td>
+        <td id="num-23" style="background-image: url('Anh/SocTrang.jpg')"></td>
+    </tr>
+    <tr>
+        <td id="num-13" style="background-image: url('Anh/QuangNgai.jpg')"></td>
+        <td id="player1" colspan="2"></td>
+        <td id="point1"></td>
+        <td id="position1"></td>
+        <td id="display1" colspan="2"></td>
+        <td id="num-24" style="background-image: url('Anh/HoangSa.jpg')"></td>
+    </tr>
+    <tr>
+        <td id="num-12" style="background-image: url('Anh/DaNang.jpg')"></td>
+        <td id="player2" colspan="2"></td>
+        <td id="point2"></td>
+        <td id="position2"></td>
+        <td id="display2" colspan="2"></td>
+        <td id="num-25" style="background-image: url('Anh/TruongSa.jpg')"></td>
+    </tr>
+    <tr>
+        <td id="num-11" style="background-image: url('Anh/Hue.jpg')"></td>
+        <td><button onclick="throwDice()">Throw Dice</button></td>
+        <td colspan="5" id="display"></td>
+        <td id="num-26" style="background-image: url('Anh/PhuQuoc.jpg')"></td>
+    </tr>
+    <tr>
+        <td id="num-10" style="background-image: url('Anh/QuangTri.jpg')"></td>
+        <td rowspan="2">Guide</td>
+        <td rowspan="2" colspan="5" id="guide"></td>
+        <td id="num-27" style="background-image: url('Anh/BinhDinh.jpg')"></td>
+    </tr>
+    <tr>
+        <td id="num-9" style="background-image: url('Anh/QuangBinh.jpg')"></td>
+
+        <td id="num-28" style="background-image: url('Anh/CaMau.jpg')"></td>
+    </tr>
+    <tr>
+        <td id="num-8" style="background-image: url('Anh/HaTinh.jpg')"></td>
+        <td id="num-7" style="background-image: url('Anh/NgheAn.jpg')"></td>
+        <td id="num-6" style="background-image: url('Anh/ThaiBinh.jpg')"></td>
+        <td id="num-5" style="background-image: url('Anh/ThanhHoa.jpg')"></td>
+        <td id="num-4" style="background-image: url('Anh/HaiDuong.jpg')"></td>
+        <td id="num-3" style="background-image: url('Anh/HaiPhong.jpg')"></td>
+        <td id="num-2" style="background-image: url('Anh/HaNoi.jpg')"></td>
+        <td id="num-1" style="background-image: url('Anh/Start.jpg')"></td>
+    </tr>
+</table>
+</body>
+<script>
+    displayAll();
+    document.getElementById('num-1').innerHTML += player1.getPlayerName() + "<br>" + player2.getPlayerName();
+    let guide = document.getElementById('guide');
+    let indexMove = 1;
+    let turn = 1;
+
+
+    function checkGameOver(player){
+        if (player.arrPlayer.length==0){
+            alert(player.getPlayerName() + " da thua");
+        }
+    }
+    function payWhenVisiting(player1, player2){
+        let place = arr[indexMove-1];
+            if (document.getElementById('num-'+place.placeId).style.backgroundColor === player1.color&&(turn %2 !==0)) {
+                player2.point -= (place.placeValue/4);
+                player1.point += (place.placeValue/4);
+                alert("Mình xin chứ mình không cướp êiiii!!!");
+                guide.innerHTML ="";
+            } else if (document.getElementById('num-'+place.placeId).style.backgroundColor === player2.color&&(turn %2 ===0)) {
+                player1.point -= (place.placeValue / 4);
+                player2.point += (place.placeValue / 4);
+                alert("Mình xin chứ mình không cướp êiiii!!!");
+                guide.innerHTML ="";
+            }
+        displayPoint(player1);
+        displayPoint(player2);
+    }
+</script>
+</html>
