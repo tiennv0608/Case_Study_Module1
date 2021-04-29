@@ -146,14 +146,14 @@
     }
     function payWhenVisiting(player1, player2){
         let place = arr[indexMove-1];
-        if (check(player2)){
+        if (turn %2 !==0){
             if (document.getElementById('num-'+place.placeId).style.backgroundColor === player1.color) {
                 player2.point -= (place.placeValue/4);
                 player1.point += (place.placeValue/4);
                 alert("Mình xin chứ mình không cướp êiiii!!!");
                 guide.innerHTML ="";
             }
-        } else if (check(player1)){
+        } else if (turn %2 ===0){
             if (document.getElementById('num-'+place.placeId).style.backgroundColor === player2.color) {
                 player1.point -= (place.placeValue / 4);
                 player2.point += (place.placeValue / 4);
@@ -164,6 +164,6 @@
         displayPoint(player1);
         displayPoint(player2);
     }
-
+    console.log(turn)
 </script>
 </html>
