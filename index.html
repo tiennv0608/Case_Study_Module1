@@ -132,13 +132,6 @@
         }
     }
 
-    function check(player) {
-        let place = arr[indexMove-1];
-        if (player.arrPlayer.indexOf(place) === -1) {
-            return true;
-        }
-    }
-
     function checkGameOver(player){
         if (player.arrPlayer.length==0){
             alert(player.getPlayerName() + " da thua");
@@ -164,6 +157,5 @@
         displayPoint(player1);
         displayPoint(player2);
     }
-    console.log(turn)
 </script>
 </html>

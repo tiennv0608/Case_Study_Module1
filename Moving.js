@@ -1,7 +1,7 @@
 function throwDice(player) {
     turn % 2 === 0 ? player = player2 : player = player1;
     turn++;
-    let valueDice = 1
+    let valueDice = Math.round(Math.random() * 5 + 1);
     document.getElementById('display').innerHTML = valueDice;
     player.move += valueDice;
     if (player.move > 28) {
