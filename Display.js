@@ -21,3 +21,10 @@ function displayPlayer(player){
 function displayPlayerPosition(player,place) {
     document.getElementById('position'+player.number).innerHTML = place.getPlaceName()
 }
+function displayPlaceOfPlayer (place, player){
+    let displayPlace ="";
+    for (let i=0;i<player.arrPlayer.length;i++) {
+         displayPlace += player.arrPlayer[i].getPlaceName() +" "
+    }
+    document.getElementById('display'+player.number).innerHTML = displayPlace
+}
